@@ -27,6 +27,6 @@ public class LigneCommandeClient  extends AbsrtactEntity{
 	@ManyToOne
 	@JoinColumn(name="idcommandeclient")
 	private CommandeClient commandeClient;
-	private BigDecimal quantité;
+	private BigDecimal quantite;
 	private BigDecimal prixUnitaire;
 }

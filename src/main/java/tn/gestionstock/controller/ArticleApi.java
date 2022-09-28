@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import tn.gestionstock.Dto.ArticleDto;
 import static tn.gestionstock.utils.Constant.APP_ROOT;
@@ -17,7 +16,7 @@ public interface ArticleApi {
 	ArticleDto save(@RequestBody ArticleDto article);
 	@GetMapping(value = APP_ROOT+"/Article/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	ArticleDto findById(@PathVariable Integer id);
-	@GetMapping(value = APP_ROOT+"/Article/{code}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = APP_ROOT+"/Articlebycode/{code}",produces = MediaType.APPLICATION_JSON_VALUE)
 	ArticleDto findByCodeArticle(@PathVariable String code);
 	@GetMapping(value = APP_ROOT+"/Article/all",produces = MediaType.APPLICATION_JSON_VALUE)
 	List<ArticleDto> findAll();

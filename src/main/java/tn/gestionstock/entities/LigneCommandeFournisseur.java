@@ -29,6 +29,6 @@ public class LigneCommandeFournisseur  extends AbsrtactEntity{
 	@ManyToOne
 	@JoinColumn(name="idcommandefournisseur")
 	private CommandeFournisseur commandeFournisseurs;
-	private BigDecimal quantité;
+	private BigDecimal quantite;
 	private BigDecimal prixUnitaire;
 }

@@ -2,21 +2,19 @@ package tn.gestionstock.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.gestionstock.Dto.ArticleDto;
 import tn.gestionstock.service.ArticleService;
 @RestController
 public class ArticleController implements ArticleApi {
-	@Autowired
 	private ArticleService articleService;
 
-	/*
-	 * public ArticleController(ArticleService articleService) {
-	 * 
-	 * this.articleService = articleService; }
-	 */
+	
+	  public ArticleController(ArticleService articleService) {
+	  
+	  this.articleService = articleService; }
+	 
 	@Override
 	public ArticleDto save(ArticleDto article) {
 		return articleService.save(article);

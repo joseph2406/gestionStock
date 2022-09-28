@@ -2,10 +2,10 @@ package tn.gestionstock.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +13,10 @@ import tn.gestionstock.Dao.ArticleRepository;
 import tn.gestionstock.Dto.ArticleDto;
 import tn.gestionstock.entities.Article;
 import tn.gestionstock.exception.EntityNotFoundException;
+import tn.gestionstock.exception.ListIsEmptyOrNullException;
 import tn.gestionstock.exception.ErrorCodes;
 import tn.gestionstock.exception.InvalidEntityException;
+import tn.gestionstock.exception.MapProblem;
 import tn.gestionstock.mapper.ArticleMapper;
 @Service
 @Slf4j
@@ -50,8 +52,11 @@ public class ArticleServiceImpl implements ArticleService{
 			return null;
 		}
 		Optional<Article> art=repoArt.findById(id);
-		ArticleDto dto=mapArt.fromEntityToDto(art.get());
-		return Optional.of(dto).orElseThrow(()->new EntityNotFoundException("aucun article trouvé avec l'id="+id+""));
+		if(art.isPresent()) {
+		return Optional.of(mapArt.fromEntityToDto(art.get())).orElseThrow(()->new MapProblem("Mappage impossible l'ip="+id+"",ErrorCodes.MAP_IMPOSSIBLE));
+		}
+		else
+		throw new EntityNotFoundException("Article non trouvé avec l'id={}"+id,ErrorCodes.ARTICLE_NOT_FOUND);
 	}
 
 	@Override
@@ -68,8 +73,11 @@ public class ArticleServiceImpl implements ArticleService{
 
 	@Override
 	public List<ArticleDto> findAll() {
-		return repoArt.findAll().stream().map(mapArt::fromEntityToDto)
-				.collect(Collectors.toList());
+		List<Article> listArt=repoArt.findAll();
+		if(ObjectUtils.isEmpty(listArt)) {
+			throw new ListIsEmptyOrNullException("Liste Vide ou Null",ErrorCodes.LIST_EMPTY_OR_NULL);
+		}
+		return mapArt.fromEntitiesToDtoList(listArt);
 	}
 
 	@Override
