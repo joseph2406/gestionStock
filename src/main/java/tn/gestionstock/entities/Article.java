@@ -27,6 +27,7 @@ private BigDecimal prixUnitaireHt;
 private BigDecimal tauxTva;
 private BigDecimal prixUnitaireTtc;
 private String photo;
+private Integer idEntreprise;
 @ManyToOne
 @JoinColumn(name="idcategory")
 private Category category;

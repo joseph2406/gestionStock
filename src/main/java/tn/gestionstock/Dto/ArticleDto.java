@@ -22,5 +22,6 @@ public class ArticleDto {
 	private BigDecimal tauxTva;
 	private BigDecimal prixUnitaireTtc;
 	private String photo;
+	private Integer IdEntreprise;
 	//private CategoryDto category;
 }
