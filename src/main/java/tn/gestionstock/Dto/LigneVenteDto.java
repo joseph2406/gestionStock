@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import lombok.Builder;
 import lombok.Data;
+import tn.gestionstock.entities.Article;
 
 @Data
 @Builder
@@ -12,5 +13,6 @@ public class LigneVenteDto {
 	private VentesDto vente;
 	private BigDecimal quantite;
 	private BigDecimal prixUnitaire;
+	private ArticleDto articleDto;
 
 }

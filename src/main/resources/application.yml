@@ -14,3 +14,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 server:
   port: 9974
+  
+flickr:
+  apiKey: 1a6a80fb3009e3af21ea165163d32067
+  apiSecret: 196a9f7e2a0b1cdf
+  appKey: 72157720860039838-ed4f40aae8308788
+  appSecret: df6248f5f9a69b7f

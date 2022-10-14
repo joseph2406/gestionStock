@@ -1,6 +1,7 @@
 package tn.gestionstock.Dto;
 
 import java.time.Instant;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,5 +12,5 @@ public class VentesDto {
 	private String code;
 	private Instant dateVente;
 	private String commentaire;
-
+	private List<LigneVenteDto> ligneVentesDto;
 }

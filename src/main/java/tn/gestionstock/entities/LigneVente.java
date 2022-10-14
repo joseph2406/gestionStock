@@ -26,5 +26,5 @@ public class LigneVente  extends AbsrtactEntity{
 	private Ventes vente;
 	private BigDecimal quantite;
 	private BigDecimal prixUnitaire;
-
+	private Article article;
 }
