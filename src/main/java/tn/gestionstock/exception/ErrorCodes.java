@@ -21,7 +21,8 @@ public enum ErrorCodes {
 	VENTE_NOT_FOUND(13000),
 	MAP_IMPOSSIBLE(9999),
 	LIST_EMPTY_OR_NULL(1111),
-	INVALID_VENTE(7777)
+	INVALID_VENTE(7777),
+	FOURNISSEUR_NOT_VALID(13000),
 	;
 	private int code;
 	ErrorCodes(int code) {
