@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.logging.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +32,7 @@ public class ApllicationRequestFilter extends OncePerRequestFilter{
 		final String authHeader=request.getHeader("Authorization");
 		String username=null;
 		String jwt=null;
+		String idEntreprise=null;
 		if((StringUtils.hasLength(authHeader)) && (authHeader.startsWith("Bearer "))){
 			jwt = authHeader.substring(7);
 			username=jwtUtil.extractUserName(jwt);
@@ -44,6 +46,7 @@ public class ApllicationRequestFilter extends OncePerRequestFilter{
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}
 		}
+		MDC.put("idEntreprise", idEntreprise);
 		filterChain.doFilter(request,response);
 	}
 }

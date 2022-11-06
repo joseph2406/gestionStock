@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 import tn.gestionstock.Dao.UtilisateurRepository;
@@ -77,6 +78,20 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 			return;
 		}
 		utilRepo.deleteById(id);
+	}
+
+	@Override
+	public UtilisateurDto findByEmail(String mail) {
+		if(!StringUtils.hasLength(mail))
+			log.error("mail est null");
+		UtilisateurDto utilisateur=null;
+		try {
+			utilisateur=utilMap.fromEntityToDto(utilRepo.findByEmail(mail).get());
+		}
+		catch(Exception e) {
+			throw new MapProblem("Problème de Mappage", ErrorCodes.MAP_IMPOSSIBLE);
+		}
+		return utilisateur;
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import tn.gestionstock.Dto.auth.AuthenticationRequest;
 import tn.gestionstock.Dto.auth.AuthenticationResponse;
+import tn.gestionstock.Dto.auth.ExtendedUser;
 import tn.gestionstock.service.auth.ApllicationUserDetailsService;
 import tn.gestionstock.utils.JwtUtils;
 
@@ -27,8 +28,10 @@ public class AuthenticationController {
 	private JwtUtils jwtUtils;
 	@PostMapping("/authenticate")
 	public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
+		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
+				(request.getLogin(), request.getPassword()));
 		  final UserDetails userDetails=userDetailService.loadUserByUsername(request.getLogin()); 
-		  final String jwt=jwtUtils.generateToken(userDetails);
+		  final String jwt=jwtUtils.generateToken((ExtendedUser)userDetails);
 		return ResponseEntity.ok(AuthenticationResponse.builder().accessToken(jwt).build());
 	}
 }

@@ -30,10 +30,13 @@ public class AbsrtactEntity implements Serializable {
 @Id
 @GeneratedValue
 private Integer id;
-@CreatedDate
-@Column(name="creationDate",nullable=false)
-@JsonIgnore
-private Instant creationDate;
+/*
+ * @CreatedDate
+ * 
+ * @Column(name="creationDate",nullable=false)
+ * 
+ * @JsonIgnore private Instant creationDate;
+ */
 @LastModifiedDate
 @Column(name="lastModifiedDate")
 @JsonIgnore
