@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import tn.gestionstock.exception.EntityNotFoundException;
 import tn.gestionstock.exception.InvalidEntityException;
+import tn.gestionstock.exception.InvalidOperationException;
 import tn.gestionstock.exception.ListIsEmptyOrNullException;
 
 @RestControllerAdvice
@@ -37,6 +38,16 @@ public ResponseEntity<ErrorDto> handleException(InvalidEntityException exception
 @ExceptionHandler(ListIsEmptyOrNullException.class)
 public ResponseEntity<ErrorDto> handleException (ListIsEmptyOrNullException exception,WebRequest webRequest){
 	final HttpStatus notFound=HttpStatus.NOT_FOUND;
+	final ErrorDto errorDto=ErrorDto.builder()
+	.code(exception.getErrorCode())
+	.httpCode(notFound.value())
+	.message(exception.getMessage())
+	.build();
+	return new ResponseEntity<>(errorDto,notFound);
+}
+@ExceptionHandler(InvalidOperationException.class)
+public ResponseEntity<ErrorDto> handleException (InvalidOperationException exception,WebRequest webRequest){
+	final HttpStatus notFound=HttpStatus.BAD_REQUEST;
 	final ErrorDto errorDto=ErrorDto.builder()
 	.code(exception.getErrorCode())
 	.httpCode(notFound.value())

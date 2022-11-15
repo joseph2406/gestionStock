@@ -3,6 +3,8 @@ package tn.gestionstock.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -33,14 +35,16 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 
 	@Override
 	public UtilisateurDto save(UtilisateurDto utilisateur) {
+		Utilisateur util=null;
 		try {
-			Utilisateur util=utilMap.fromDtoToEntity(utilisateur);
+			util=utilMap.fromDtoToEntity(utilisateur);
 			utilRepo.save(util);	
 			log.error("Uitlisateur enregistré");
 		}
 		catch(Exception e) {
-			log.error("Entité Uitlisateur  invalide");
-			throw  new InvalidEntityException("Utilisateur non valide", ErrorCodes.UTILISATEUR_NOT_VALID);
+			  log.error("Entité Uitlisateur  invalide");
+			  throw new InvalidEntityException("Utilisateur non valide",
+			  ErrorCodes.UTILISATEUR_NOT_VALID);
 		}
 		return utilisateur;
 	}

@@ -1,11 +1,13 @@
 package tn.gestionstock.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.gestionstock.Dto.CommandeClientDto;
+import tn.gestionstock.entities.EtatCommande;
 import tn.gestionstock.service.CommandeClientService;
 @RestController
 public class CommandeClientController implements CommandeClientApi {
@@ -44,6 +46,31 @@ public class CommandeClientController implements CommandeClientApi {
 	public ResponseEntity delete(Integer id) {
 		commandeclientService.delete(id);
 		return ResponseEntity.ok().build();
+	}
+
+	@Override
+	public ResponseEntity<CommandeClientDto> updateEtatCommande(Integer idCommande, EtatCommande etatCommande) {
+		
+		 return ResponseEntity.ok(commandeclientService.updateEtatCommande(idCommande, etatCommande));
+	}
+
+	@Override
+	public ResponseEntity<CommandeClientDto> updateQuantiteCommande(Integer idCommande, Integer idLigneCommande,
+			BigDecimal qte) {
+		return ResponseEntity.ok(commandeclientService.updateQuantiteCommande(idCommande, idCommande, qte));
+	}
+
+	@Override
+	public ResponseEntity<CommandeClientDto> updateClientCommande(Integer idCommande, Integer idClient) {
+		
+		return ResponseEntity.ok(commandeclientService.updateClientCommande(idCommande, idClient));
+	}
+
+	@Override
+	public ResponseEntity<CommandeClientDto> updateArticleCommande(Integer idCommande, Integer idLigneCommande,
+			Integer newArticle) {
+		
+		return ResponseEntity.ok(commandeclientService.updateArticleCommande(idCommande, idLigneCommande, newArticle));
 	}
 
 }

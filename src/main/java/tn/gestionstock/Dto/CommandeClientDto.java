@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
+import tn.gestionstock.entities.EtatCommande;
 @Data
 @Builder
 public class CommandeClientDto {
@@ -12,5 +13,10 @@ public class CommandeClientDto {
 	private String code;
 	private Instant dateCommande;
 	private ClientDto client;
+	private EtatCommande etatCommande;
 	private List<LigneCommandeClientDto> ligneCommandeClients;
+	public  boolean isCommandeLivree() {
+		return EtatCommande.LIVREE.equals(this.etatCommande);
+		
+	}
 }

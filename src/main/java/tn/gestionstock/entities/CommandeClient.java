@@ -25,6 +25,7 @@ import lombok.Setter;
 public class CommandeClient  extends AbsrtactEntity{
 	private String code;
 	private Instant dateCommande;
+	private EtatCommande etatCommande;
 	@ManyToOne
 	@JoinColumn(name="idclient")
 	private Client client;
